@@ -1,0 +1,19 @@
+@font-face {
+	font-family: 'Inter';
+	src: url('/fonts/Inter-VariableFont_slnt,wght.ttf');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply antialiased;
+}
+
+/* Custom daisyUI components */
+@layer components {
+	.navbar {
+		@apply bg-base-300;
+	}
+}
