@@ -7,13 +7,15 @@ export default {
 				'8xl': '90rem'
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif', 'system-ui']
+				sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system'],
+				Display: ['Lexend', 'ui-sans-serif', 'system-ui', '-apple-system']
 			}
 		}
 	},
 	plugins: [require('daisyui')],
 	daisyui: {
 		logs: false,
-		themes: ['light', 'dark']
+		themes: ['night', 'dark'],
+		darkTheme: 'night'
 	}
 }
