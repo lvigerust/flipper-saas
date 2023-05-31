@@ -1,1 +1,7 @@
-<h1>Password settings</h1>
+<script lang="ts">
+	import PasswordForm from './PasswordForm.svelte'
+
+	export let data
+</script>
+
+<PasswordForm data={data.passwordForm} />

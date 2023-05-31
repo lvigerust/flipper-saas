@@ -32,12 +32,12 @@
 		<h2>Set your account settings down below</h2>
 	</hgroup>
 
-	<div class="mb-10 mt-6 flex justify-evenly gap-1 rounded-md bg-base-300 p-[5px]">
+	<div class="mb-10 mt-6 flex justify-evenly gap-1 rounded-lg bg-slate-950/25 p-[5px]">
 		{#each subPages as { name, href }}
 			<a
 				class="{$page.url.pathname === href
-					? 'bg-base-200 font-semibold text-slate-300'
-					: ''} flex h-8 min-h-0 w-full items-center justify-center rounded-md px-10 py-5 text-sm font-normal normal-case"
+					? 'bg-slate-900/50 font-semibold text-slate-300'
+					: ''} flex h-8 min-h-0 w-full items-center justify-center rounded-lg px-10 py-5 text-sm font-normal normal-case"
 				{href}>{name}</a
 			>
 		{/each}
