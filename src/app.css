@@ -20,6 +20,14 @@ body {
 /* Custom daisyUI components */
 @layer components {
 	.navbar {
-		@apply mx-auto max-w-8xl px-4 py-8 sm:px-6 lg:px-8;
+		@apply mx-auto max-w-8xl px-4 py-6 sm:px-6 lg:px-8;
+	}
+
+	.tailwindInput {
+		@apply block w-full rounded-md border-0 bg-slate-800 px-3 py-2 text-slate-200 shadow-sm outline-none ring-1 ring-inset ring-slate-600 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6;
+	}
+
+	.inputError {
+		@apply mt-2 block text-sm font-medium leading-6 text-red-500;
 	}
 }

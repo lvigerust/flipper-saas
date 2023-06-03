@@ -1,21 +1,20 @@
 <script lang="ts">
-	import { page } from '$app/stores'
-	import { Navbar } from '$components'
-	import { fly } from 'svelte/transition'
 	import '../app.css'
 	import { onMount } from 'svelte'
 	import { invalidate } from '$app/navigation'
-
-	let route: string | null
-
-	$: if ($page.route.id) {
-		route = $page.route.id.slice(1).charAt(0).toUpperCase() + $page.route.id.slice(2)
-	}
+	import { firstMount } from '$lib/stores'
+	import { Navbar } from '$components'
+	import { fade } from 'svelte/transition'
 
 	export let data
+
 	$: ({ url, session, supabase } = data)
+	$: if (url) {
+		url = url.slice(1).charAt(0).toUpperCase() + url.slice(2)
+	}
 
 	onMount(() => {
+		firstMount.set(false)
 		const {
 			data: { subscription }
 		} = supabase.auth.onAuthStateChange((event, _session) => {
@@ -23,24 +22,29 @@
 				invalidate('supabase:auth')
 			}
 		})
+
 		return () => subscription.unsubscribe()
 	})
 </script>
 
 <svelte:head>
-	<title>{route ? route : 'Home'} — Wazzzup</title>
+	<title>{url !== '' ? url : 'Home'} — Wazzzup</title>
 </svelte:head>
 
-<Navbar {session} />
+<div class="flex h-full flex-col">
+	<Navbar {session} />
 
-<main class="overflow-hidden">
-	{#key url.slice(0, 3)}
-		<div
-			in:fly={{ x: 500, duration: 300, delay: 300 }}
-			out:fly={{ x: -500, duration: 300 }}
-			class="mx-auto max-w-8xl px-4 pb-8 pt-16 sm:px-6 lg:px-8"
-		>
-			<slot />
-		</div>
-	{/key}
-</main>
+	<div class="flex-1 overflow-hidden">
+		<main class="mx-auto h-full max-w-8xl px-4 py-16 sm:px-6 md:px-8">
+			{#key url}
+				<div
+					class="transition-layer h-full"
+					in:fade={{ duration: 150, delay: 150 }}
+					out:fade={{ duration: 150 }}
+				>
+					<slot />
+				</div>
+			{/key}
+		</main>
+	</div>
+</div>
