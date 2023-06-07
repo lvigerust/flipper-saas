@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { DotsIcon } from '$components/icons'
-	import { copy } from 'svelte-copy'
+	import { EllipsisVertical } from '$icons'
 	import CreateContactModal from './CreateContactModal.svelte'
 	import DeleteContactModal from './DeleteContactModal.svelte'
 
@@ -73,23 +72,12 @@
 											>{contact.name ?? '--'}</td
 										>
 										<td
-											class="transition-colors duration-100 group-hover:bg-slate-700/50 group-hover:text-slate-300"
+											class="select-all transition-colors duration-100 group-hover:bg-slate-700/50 group-hover:text-slate-300"
 										>
-											<div class="tooltip-primary tooltip" data-tip={tooltipText ?? 'Copy'}>
-												<span
-													use:copy={`${contact.email}`}
-													on:svelte-copy={clickToCopy}
-													on:mouseleave={() => {
-														setTimeout(() => {
-															tooltipText = undefined
-														}, 300)
-													}}
-													class="cursor-pointer">{contact.email ?? '--'}</span
-												>
-											</div>
+											{contact.email ?? '--'}
 										</td>
 										<td
-											class="transition-colors duration-100 group-hover:bg-slate-700/50 group-hover:text-slate-300"
+											class="select-all transition-colors duration-100 group-hover:bg-slate-700/50 group-hover:text-slate-300"
 											>{contact.phone ?? '--'}</td
 										>
 										<td
@@ -101,7 +89,7 @@
 										>
 											<details class="dropdown-end dropdown">
 												<summary class="m-1 w-full cursor-pointer text-blue-300"
-													><DotsIcon /></summary
+													><EllipsisVertical /></summary
 												>
 												<ul
 													class="dropdown-content menu rounded-box z-10 w-52 bg-base-100 p-2 shadow"

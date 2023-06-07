@@ -1,9 +1,8 @@
 import type { Database } from '$lib/supabase-types'
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
 
-// See https://kit.svelte.dev/docs/types#app
-// for information about these interfaces
 declare global {
+	///. <reference types="stripe-event-types" />
 	namespace App {
 		// interface Error {}
 		interface Locals {

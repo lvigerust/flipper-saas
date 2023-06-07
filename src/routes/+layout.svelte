@@ -28,10 +28,10 @@
 </script>
 
 <svelte:head>
-	<title>{url !== '' ? url : 'Home'} — Wazzzup</title>
+	<title>{url !== '' ? url : 'Home'} — Flipper</title>
 </svelte:head>
 
-<div class="flex h-full flex-col">
+<div class="flex h-full flex-col overflow-hidden">
 	<Navbar {session} />
 
 	<div class="flex-1 overflow-hidden">

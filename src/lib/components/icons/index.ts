@@ -1,4 +1,5 @@
-import UserIcon from './UserIcon.svelte'
-import DotsIcon from './DotsIcon.svelte'
+import User from './User.svelte'
+import EllipsisVertical from './EllipsisVertical.svelte'
+import CheckCircle from './CheckCircle.svelte'
 
-export { UserIcon, DotsIcon }
+export { User, EllipsisVertical, CheckCircle }

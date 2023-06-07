@@ -1,4 +1,5 @@
 import { emailSchema, passwordSchema, profileSchema } from '$lib/schemas.js'
+import { getSubscriptionTier } from '$lib/server/subsriptions.js'
 import { error, redirect } from '@sveltejs/kit'
 import { superValidate } from 'sveltekit-superforms/server'
 
@@ -32,6 +33,7 @@ export const load = async (event) => {
 		}),
 		passwordForm: superValidate(passwordSchema, {
 			id: 'password'
-		})
+		}),
+		tier: getSubscriptionTier(session.user.id)
 	}
 }

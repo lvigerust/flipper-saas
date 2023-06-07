@@ -8,12 +8,8 @@
 
 	const menuItems: { label: string; href: string }[] = [
 		{
-			label: 'Features',
-			href: '/features'
-		},
-		{
-			label: 'Context',
-			href: '/context'
+			label: 'Pricing',
+			href: '/pricing'
 		},
 		{
 			label: 'Contacts',
@@ -38,14 +34,14 @@
 	{#if animateItems}
 		<div class="navbar-start gap-x-12">
 			<a
-				in:fly={{ y: -50, delay: 100 }}
+				in:fly={{ x: -150, duration: 800, delay: 200 }}
 				href="/"
-				class="m-1 -ml-2 px-2 tracking-tight hover:text-white"
-				>Wazzz<span class="font-semibold tracking-normal text-slate-300">up</span></a
-			>
+				class="m-1 -ml-2 px-2 font-semibold tracking-tight hover:text-slate-300"
+				>faire<span class="text-slate-300">Sauter</span>
+			</a>
 			<ul class="flex gap-x-6">
 				{#each menuItems as { label, href }, index}
-					<li in:fly={{ y: -50, delay: 200 + index * 75 }}>
+					<li in:fly={{ opacity: 0, duration: 800, y: -50, delay: 300 + index * 75 }}>
 						<a
 							{href}
 							class="inline-block rounded-lg px-2 py-1 text-sm hover:bg-slate-800/30 hover:text-slate-100 {$page
@@ -59,7 +55,7 @@
 			</ul>
 		</div>
 
-		<div class="navbar-end gap-x-5 md:gap-x-8">
+		<div in:fly={{ x: 150, duration: 800, delay: 200 }} class="navbar-end gap-x-5 md:gap-x-8">
 			{#if session}
 				<div class="dropdown-end dropdown -mr-2">
 					<button
@@ -70,7 +66,7 @@
 						>Account</button
 					>
 					<div
-						class="dropdown-content menu z-10 mt-2 w-56 rounded-md bg-slate-800 p-2 shadow"
+						class="dropdown-content menu z-50 mt-2 w-56 rounded-md bg-slate-800 p-2 shadow"
 						role="menu"
 						aria-orientation="vertical"
 						aria-labelledby="menu-button"
@@ -78,9 +74,9 @@
 					>
 						<div class="py-1" role="none">
 							<div class="block px-2 py-1 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">
-								{session.user.email}
+								{session.user.user_metadata.full_name || session.user.email}
 							</div>
-							<div class="divider mx-2 my-2" />
+							<div class="divider mx-2 my-1" />
 							<a
 								href="/account/profile"
 								class="block rounded-md px-2 py-1 text-sm hover:font-medium hover:text-slate-200"
@@ -89,13 +85,13 @@
 								id="menu-item-1">Settings</a
 							>
 							<a
-								href="/account/billing"
+								href="/account/billing/portal"
 								class="block px-2 py-1 text-sm hover:font-medium hover:text-slate-200"
 								role="menuitem"
 								tabindex="-1"
 								id="menu-item-2">Billing</a
 							>
-							<div class="divider mx-2 my-2" />
+							<div class="divider mx-2 my-1" />
 							<form method="POST" action="/logout" role="none">
 								<button
 									type="submit"

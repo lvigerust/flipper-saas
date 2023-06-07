@@ -6,7 +6,7 @@
 	const { form, errors, enhance } = superForm(data.form)
 </script>
 
-<div class=" flex min-h-full flex-1 flex-col justify-center px-6 lg:px-8">
+<section>
 	<div class="sm:mx-auto sm:w-full sm:max-w-sm">
 		<h1 class="mt-6 text-center text-2xl font-semibold leading-9 tracking-tight text-slate-300">
 			Login to your account
@@ -63,4 +63,4 @@
 			>
 		</p>
 	</div>
-</div>
+</section>
