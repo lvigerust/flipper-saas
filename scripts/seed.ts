@@ -24,7 +24,7 @@ const testUsers = [
 	},
 	{
 		full_name: 'Ludvig Vigerust',
-		email: 'l.vigerust@gmail.com',
+		email: 'ludvig@vigerust.dev',
 		password: 'passord'
 	}
 ]
