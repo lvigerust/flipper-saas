@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-		<form method="POST" class="space-y-6" use:enhance data-testid="register-form">
+		<form method="POST" class="space-y-6" use:enhance>
 			<div>
 				<label for="full_name" class="block text-sm font-medium leading-6">Name</label>
 				<div class="mt-2">
@@ -24,7 +24,6 @@
 						bind:value={$form.full_name}
 						type="text"
 						name="full_name"
-						data-testid="full_name"
 						class="block w-full rounded-md border-0 bg-slate-800 px-3 py-2 text-slate-200 shadow-sm outline-none ring-1 ring-inset ring-slate-600 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 					/>
 					{#if $errors.full_name}
@@ -41,7 +40,6 @@
 						bind:value={$form.email}
 						type="email"
 						name="email"
-						data-testid="email"
 						class="block w-full rounded-md border-0 bg-slate-800 px-3 py-2 text-slate-200 shadow-sm outline-none ring-1 ring-inset ring-slate-600 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 					/>
 					{#if $errors.email}
@@ -58,7 +56,6 @@
 						bind:value={$form.password}
 						type="password"
 						name="password"
-						data-testid="password"
 						class="block w-full rounded-md border-0 bg-slate-800 px-3 py-2 text-slate-200 shadow-sm outline-none ring-1 ring-inset ring-slate-600 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 					/>
 					{#if $errors.password}
@@ -77,7 +74,6 @@
 						bind:value={$form.passwordConfirm}
 						type="password"
 						name="passwordConfirm"
-						data-testid="passwordConfirm"
 						class="block w-full rounded-md border-0 bg-slate-800 px-3 py-2 text-slate-200 shadow-sm outline-none ring-1 ring-inset ring-slate-600 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 					/>
 					{#if $errors.passwordConfirm}
