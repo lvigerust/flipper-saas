@@ -92,11 +92,10 @@
 								id="menu-item-2">Billing</a
 							>
 							<div class="divider mx-2 my-1" />
-							<form method="POST" action="/logout" role="none">
+							<form method="POST" action="/logout" role="none" data-testid="logout-form">
 								<button
 									type="submit"
 									class="block w-full px-2 py-1 text-left text-sm hover:font-medium hover:text-slate-200"
-									role="menuitem"
 									tabindex="-1"
 									id="menu-item-3">Sign out</button
 								>
