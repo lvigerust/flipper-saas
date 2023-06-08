@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { EllipsisVertical } from '$icons'
+	import { hasReachedMaxContacts } from '$lib/helpers'
 	import CreateContactModal from './CreateContactModal.svelte'
 	import DeleteContactModal from './DeleteContactModal.svelte'
+	import UpgradePlanModal from './UpgradePlanModal.svelte'
 
 	let createContactModal: HTMLDialogElement
 	let deleteContactModal: HTMLDialogElement
 	let contactToDelete: string
+	let upgradePlanModal: HTMLDialogElement
 
 	function handleContactDelte(contact_id: string) {
 		contactToDelete = contact_id
@@ -14,17 +17,18 @@
 	}
 
 	export let data
-	$: ({ createContactForm, contacts, deleteContactForm } = data)
+	$: ({ createContactForm, contacts, deleteContactForm, tier, contactsCount } = data)
+	$: reachedMaxContacts = hasReachedMaxContacts(tier, contactsCount)
 
-	let tooltipText: string | undefined
+	function handleContactCreate() {
+		if (reachedMaxContacts) {
+			upgradePlanModal.showModal()
+			return
+		}
 
-	function clickToCopy() {
-		tooltipText = 'Copied to clipboard'
+		createContactModal.showModal()
 	}
 </script>
-
-<CreateContactModal bind:createContactModal {createContactForm} />
-<DeleteContactModal bind:deleteContactModal contactId={contactToDelete} {deleteContactForm} />
 
 <div class="rounded-lg border border-slate-700 bg-neutral py-10">
 	<div class="mx-auto max-w-7xl">
@@ -39,7 +43,7 @@
 				<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
 					<button
 						tabindex="0"
-						on:click={() => createContactModal.showModal()}
+						on:click={handleContactCreate}
 						class="block cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white"
 						>Add user</button
 					>
@@ -111,6 +115,14 @@
 		</section>
 	</div>
 </div>
+
+<CreateContactModal bind:createContactModal {createContactForm} />
+<DeleteContactModal bind:deleteContactModal contactId={contactToDelete} {deleteContactForm} />
+<UpgradePlanModal
+	bind:upgradePlanModal
+	{tier}
+	message="You have reached the max contacts for your plan. Upgrade to add more contacts."
+/>
 
 <style>
 	details > summary {
