@@ -21,6 +21,11 @@ const testUsers = [
 		full_name: 'Test User 3',
 		email: 't3@t.com',
 		password: 'passord'
+	},
+	{
+		full_name: 'Ludvig Vigerust',
+		email: 'l.vigerust@gmail.com',
+		password: 'passord'
 	}
 ]
 

@@ -37,7 +37,7 @@
 				in:fly={{ x: -150, duration: 800, delay: 200 }}
 				href="/"
 				class="m-1 -ml-2 px-2 font-semibold tracking-tight hover:text-slate-300"
-				>faire<span class="text-slate-300">Sauter</span>
+				>Flipper
 			</a>
 			<ul class="flex gap-x-6">
 				{#each menuItems as { label, href }, index}
