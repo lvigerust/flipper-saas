@@ -48,7 +48,7 @@
 				<a
 					in:scale={{ delay: 150 }}
 					class="group inline-flex items-center justify-center rounded-full px-4 py-2 text-sm text-slate-400 ring-1 ring-slate-800 hover:text-slate-300 hover:ring-slate-700"
-					href="#features">See features</a
+					href="/pricing">See features</a
 				>
 			{/if}
 		</div>
