@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { CreateContactSchema } from '$lib/schemas'
+	import toast from 'svelte-french-toast'
 	import { superForm } from 'sveltekit-superforms/client'
 	import type { Validation } from 'sveltekit-superforms/index'
 
@@ -9,10 +10,22 @@
 	const { form, errors, enhance } = superForm(createContactForm, {
 		resetForm: true,
 		onResult: ({ result }) => {
-			if (result.type === 'success') {
-				createContactModal.close()
-				return
+			switch (result.type) {
+				case 'success':
+					toast.success('Successfully created contact!')
+					createContactModal.close()
+					break
+				case 'error':
+					toast.error('Error creating your contact.')
+					break
+				case 'failure':
+					toast.error('Error creating your contact.')
+					break
+
+				default:
+					return
 			}
+			return
 		}
 	})
 
