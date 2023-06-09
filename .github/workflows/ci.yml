@@ -49,8 +49,8 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Install Playwright Browsers
-        run: pnpx playwright install --with-deps chromium
+      # - name: Install Playwright Browsers
+      #   run: pnpx playwright install --with-deps chromium
 
       #   - name: Test 🧪
       #     run: pnpm test
