@@ -22,6 +22,7 @@ export const load = async (event) => {
 
 export const actions = {
 	default: async (event) => {
+		const redirectTo = event.url.searchParams.get('redirectTo')
 		const form = await superValidate(event, loginUserSchema)
 
 		if (!form.valid) {
@@ -41,6 +42,10 @@ export const actions = {
 					form
 				})
 			}
+		}
+
+		if (redirectTo) {
+			throw redirect(302, `/${redirectTo.slice(1)}`)
 		}
 
 		throw redirect(302, '/')

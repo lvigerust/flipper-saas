@@ -1,4 +1,4 @@
-import { hasReachedMaxContacts } from '$lib/helpers.js'
+import { handleLoginRedirect, hasReachedMaxContacts } from '$lib/helpers.js'
 import { createContactSchema, deleteContactSchema } from '$lib/schemas.js'
 import { getContactsCount } from '$lib/server/contacts.js'
 import { getSubscriptionTier } from '$lib/server/subsriptions.js'
@@ -10,7 +10,7 @@ export const load = async (event) => {
 	const session = await event.locals.getSession()
 
 	if (!session) {
-		throw redirect(302, '/login')
+		throw redirect(302, handleLoginRedirect(event))
 	}
 
 	async function getContacts() {
