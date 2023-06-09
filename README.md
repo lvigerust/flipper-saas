@@ -1,4 +1,4 @@
-# Flipper-SaaS
+# Flipper
 
 > Personal Software as a Service, "Flipper", from Huntabyte's "Modern SaaS Apps with SvelteKit, Stripe, & Supabase" course.
 
