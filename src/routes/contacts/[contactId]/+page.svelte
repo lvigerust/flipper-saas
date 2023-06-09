@@ -1,10 +1,26 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
+	import toast from 'svelte-french-toast'
 	import { superForm } from 'sveltekit-superforms/client'
 
 	export let data
 
-	const { form, errors, enhance } = superForm(data.updateContactForm)
+	const { form, errors, enhance } = superForm(data.updateContactForm, {
+		onResult: ({ result }) => {
+			switch (result.type) {
+				case 'success':
+					toast.success('Successfully updated contact!')
+					break
+				case 'error':
+					toast.error('Error updating your contact.')
+				case 'failure':
+					toast.error('Validation error, check the details and try again.')
+				default:
+					return
+			}
+			return
+		}
+	})
 </script>
 
 <div class=" flex min-h-full flex-1 flex-col justify-center px-6 lg:px-8">

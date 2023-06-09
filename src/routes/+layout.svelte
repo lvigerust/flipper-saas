@@ -5,6 +5,7 @@
 	import { firstMount } from '$lib/stores'
 	import { Navbar } from '$components'
 	import { fade } from 'svelte/transition'
+	import { Toaster } from 'svelte-french-toast'
 
 	export let data
 
@@ -30,6 +31,8 @@
 <svelte:head>
 	<title>{url !== '' ? url : 'Home'} — Flipper</title>
 </svelte:head>
+
+<Toaster />
 
 <div class="flex h-full flex-col overflow-hidden">
 	<Navbar {session} />

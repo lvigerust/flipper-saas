@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { DeleteContactSchema } from '$lib/schemas'
+	import toast from 'svelte-french-toast'
 	import { superForm } from 'sveltekit-superforms/client'
 	import type { Validation } from 'sveltekit-superforms/index'
 
@@ -10,8 +11,17 @@
 
 	const { enhance } = superForm(deleteContactForm, {
 		onResult: ({ result }) => {
-			if (result.type === 'success') {
-				deleteContactModal.close()
+			switch (result.type) {
+				case 'success':
+					deleteContactModal.close()
+					toast.success('Successfully deleted contact!')
+					break
+				case 'error':
+					toast.error('Error deleting your contact.')
+				case 'failure':
+					toast.error('Error deleting your contact.')
+				default:
+					return
 			}
 		}
 	})
