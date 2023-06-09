@@ -1,5 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { beforeNavigate } from '$app/navigation'
+	import { fly } from 'svelte/transition'
+
+	export let data
+
+	$: ({ url } = data)
+	$: if (url) {
+		url = url.slice(9).charAt(0).toUpperCase() + url.slice(10)
+	}
 
 	const subPages: { name: string; href: string }[] = [
 		{
@@ -16,14 +24,35 @@
 		}
 	]
 
-	$: activePage = $page.url.pathname.substring($page.url.pathname.lastIndexOf('/') + 1)
-	$: if (activePage) {
-		activePage = activePage.charAt(0).toUpperCase() + activePage.slice(1)
-	}
+	let left = -300
+	let right = 300
+
+	let outTransition: number, inTransition: number
+
+	beforeNavigate((event) => {
+		const fromRoute = event.from?.route.id?.split('/').at(-1)!
+		const toRoute = event.to?.route.id?.split('/').at(-1)
+
+		if (fromRoute === 'profile') {
+			outTransition = left
+			inTransition = right
+		} else if (fromRoute === 'password') {
+			if (toRoute === 'profile') {
+				outTransition = right
+				inTransition = left
+			} else {
+				outTransition = left
+				inTransition = right
+			}
+		} else if (fromRoute === 'billing') {
+			outTransition = right
+			inTransition = left
+		}
+	})
 </script>
 
 <svelte:head>
-	<title>{activePage} settings — Flipper</title>
+	<title>{url} settings — Flipper</title>
 </svelte:head>
 
 <div class="mx-auto max-w-4xl">
@@ -35,12 +64,21 @@
 	<div class="mb-10 mt-6 flex justify-evenly gap-1 rounded-lg bg-slate-950/25 p-[5px]">
 		{#each subPages as { name, href }}
 			<a
-				class="{$page.url.pathname === href
+				class="{url === name
 					? 'bg-slate-900/50 font-semibold text-slate-300'
 					: ''} flex h-8 min-h-0 w-full items-center justify-center rounded-lg px-10 py-5 text-sm font-normal normal-case"
 				{href}>{name}</a
 			>
 		{/each}
 	</div>
-	<slot />
+
+	{#key url}
+		<div
+			in:fly|local={{ x: inTransition, delay: 400, duration: 400 }}
+			out:fly|local={{ x: outTransition, duration: 400 }}
+			class="transition-layer"
+		>
+			<slot />
+		</div>
+	{/key}
 </div>

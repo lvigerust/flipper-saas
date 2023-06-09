@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css'
 	import { onMount } from 'svelte'
-	import { invalidate } from '$app/navigation'
+	import { beforeNavigate, invalidate } from '$app/navigation'
 	import { firstMount } from '$lib/stores'
 	import { Navbar } from '$components'
 	import { fade } from 'svelte/transition'
@@ -10,7 +10,11 @@
 	export let data
 
 	$: ({ url, session, supabase } = data)
+
+	let path: string
+
 	$: if (url) {
+		path = url.split('/')[1]
 		url = url.slice(1).charAt(0).toUpperCase() + url.slice(2)
 	}
 
@@ -39,7 +43,7 @@
 
 	<div class="flex-1 overflow-hidden">
 		<main class="mx-auto h-full max-w-8xl px-4 py-16 sm:px-6 md:px-8">
-			{#key url}
+			{#key url && path}
 				<div
 					class="transition-layer h-full"
 					in:fade={{ duration: 150, delay: 150 }}
