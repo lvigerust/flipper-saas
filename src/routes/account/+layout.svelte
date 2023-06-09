@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-	<title>My account - {activePage} settings</title>
+	<title>{activePage} settings — Flipper</title>
 </svelte:head>
 
 <div class="mx-auto max-w-4xl">
