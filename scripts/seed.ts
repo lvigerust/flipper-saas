@@ -1,6 +1,7 @@
 import {
 	clearSupabaseData,
 	createContact,
+	createItem,
 	createUser,
 	startSupabase,
 	syncStripeProducts
@@ -40,6 +41,7 @@ async function seed() {
 
 			for (let i = 0; i < 5; i++) {
 				await createContact(user.id)
+				await createItem(user.id)
 			}
 		}
 	} catch (err) {

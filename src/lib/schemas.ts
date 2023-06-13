@@ -3,6 +3,7 @@ import { lookupKeys, productConfig, productNames } from './config'
 
 export const registerUserSchema = z.object({
 	full_name: z.string().max(140, 'Name must be 140 characters or less').nullish(),
+	avatar: z.string().max(200).nullish(),
 	email: z.string().email('Invalid email address'),
 	password: z
 		.string()
@@ -14,7 +15,7 @@ export const registerUserSchema = z.object({
 		.max(64, 'Password must be 64 characters or less')
 })
 
-export const profileSchema = registerUserSchema.pick({ full_name: true })
+export const profileSchema = registerUserSchema.pick({ full_name: true, avatar: true, email: true })
 export type ProfileSchema = typeof profileSchema
 
 export const emailSchema = registerUserSchema.pick({ email: true })

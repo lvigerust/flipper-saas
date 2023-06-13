@@ -14,6 +14,10 @@
 		{
 			label: 'Contacts',
 			href: '/contacts'
+		},
+		{
+			label: 'Items',
+			href: '/items'
 		}
 	]
 

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
 	import toast from 'svelte-french-toast'
 	import { superForm } from 'sveltekit-superforms/client'
 

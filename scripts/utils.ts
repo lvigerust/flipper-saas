@@ -29,6 +29,7 @@ export async function clearSupabaseData() {
 	await client.query('TRUNCATE public.billing_products CASCADE')
 	await client.query('TRUNCATE public.billing_subscriptions CASCADE')
 	await client.query('TRUNCATE public.contacts CASCADE')
+	await client.query('TRUNCATE public.items CASCADE')
 }
 
 type CreateUser = Omit<z.infer<typeof registerUserSchema>, 'passwordConfirm'>
@@ -39,7 +40,8 @@ export async function createUser(user: CreateUser) {
 		password: user.password,
 		options: {
 			data: {
-				full_name: user.full_name ?? 'Test User'
+				full_name: user.full_name ?? 'Test User',
+				avatar: user.avatar ?? faker.internet.avatar()
 			}
 		}
 	})
@@ -75,4 +77,32 @@ export async function syncStripeProducts() {
 	for (const product of products.data) {
 		await upsertProductRecord(product)
 	}
+}
+
+export async function createItem(user_id: string) {
+	const buy_price = Number(faker.commerce.price({ min: 0, max: 10000, dec: 0 }))
+	const sale_price =
+		(buy_price > 2000 ? buy_price - 1500 : buy_price) +
+		Number(faker.commerce.price({ min: 0, max: 5000 }))
+
+	const bought_at = faker.date.recent({ days: 100 })
+	const sold_at = faker.date.between({ from: bought_at, to: new Date() })
+
+	const item = {
+		id: faker.string.uuid(),
+		title: faker.commerce.productName(),
+		buy_price: buy_price,
+		sale_price: sale_price,
+		bought_at: bought_at.toUTCString(),
+		sold_at: sold_at.toUTCString(),
+		user_id
+	}
+
+	const { error, data } = await supabaseAdmin.from('items').insert(item)
+
+	if (error) {
+		throw error
+	}
+
+	return data
 }

@@ -184,20 +184,60 @@ export interface Database {
 					}
 				]
 			}
+			items: {
+				Row: {
+					bought_at: string
+					buy_price: number
+					id: string
+					sale_price: number | null
+					sold_at: string | null
+					title: string
+					user_id: string
+				}
+				Insert: {
+					bought_at?: string
+					buy_price: number
+					id?: string
+					sale_price?: number | null
+					sold_at?: string | null
+					title: string
+					user_id: string
+				}
+				Update: {
+					bought_at?: string
+					buy_price?: number
+					id?: string
+					sale_price?: number | null
+					sold_at?: string | null
+					title?: string
+					user_id?: string
+				}
+				Relationships: [
+					{
+						foreignKeyName: 'items_user_id_fkey'
+						columns: ['user_id']
+						referencedRelation: 'users'
+						referencedColumns: ['id']
+					}
+				]
+			}
 			profiles: {
 				Row: {
+					avatar: string | null
 					created_at: string
 					full_name: string | null
 					id: string
 					updated_at: string
 				}
 				Insert: {
+					avatar?: string | null
 					created_at?: string
 					full_name?: string | null
 					id: string
 					updated_at?: string
 				}
 				Update: {
+					avatar?: string | null
 					created_at?: string
 					full_name?: string | null
 					id?: string
