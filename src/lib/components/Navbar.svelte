@@ -16,8 +16,8 @@
 			href: '/contacts'
 		},
 		{
-			label: 'Items',
-			href: '/items'
+			label: 'Flips',
+			href: '/flips'
 		}
 	]
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let data
 
-	$: ({ items } = data)
+	$: ({ items, session } = data)
 
 	$: items.sort((a, b) => new Date(b.bought_at).getTime() - new Date(a.bought_at).getTime())
 
@@ -35,12 +35,36 @@
 	}
 </script>
 
-<div class="rounded-lg border border-slate-700 bg-neutral py-10">
+<section>
+	<header class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+		<div class="md:flex md:items-center md:justify-between">
+			<div class="flex items-start">
+				<div class="shrink-0">
+					<div class="relative">
+						<img
+							class="h-16 w-16 rounded-full"
+							src={session?.user.user_metadata.avatar}
+							alt="avatar"
+						/>
+					</div>
+				</div>
+				<div class="pt-[.375rem]">
+					<h2 class="text-2xl font-bold">Test User</h2>
+					<p class="text-sm font-medium">
+						<span class="text-rose-500">Pro</span> member since January 12, 2023.
+					</p>
+				</div>
+			</div>
+		</div>
+	</header>
+</section>
+
+<!-- <div class="rounded-lg border border-slate-700 bg-neutral py-10">
 	<div class="mx-auto max-w-7xl">
 		<section class="px-4">
 			<div class="mx-4 sm:flex sm:items-center">
 				<div class="flex-auto">
-					<h1 class="text-base font-semibold leading-6 text-slate-300">Items</h1>
+					<h1 class="text-base font-semibold leading-6 text-slate-300">Flips</h1>
 					<p class="mt-2 text-sm">
 						A list of all the users in your account including their name, email, phone and company.
 					</p>
@@ -57,7 +81,6 @@
 				<div class="overflow-x-auto">
 					<div class="inline-block min-w-full py-2 align-middle">
 						<table class="min-w-full text-left text-sm">
-							<!-- head -->
 							<thead>
 								<tr class="font-semibold text-slate-300 [&>th]:px-3 [&>th]:py-[.875rem]">
 									<th>Item</th>
@@ -106,5 +129,5 @@
 				</div>
 			</div>
 		</section>
-	</div>
-</div>
+	</div> 
+</div> -->
